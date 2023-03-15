@@ -4,7 +4,7 @@
 理论上通过 `cloud-init` 下发网络配置的 VPS 都可以使用，目前只在 Scaleway 上测试过
 
 - 支持 EFI 和 BIOS 启动
-- 根目录占用约300MB（精简掉了帮助文档等，使用 Btrfs 文件系统压缩）
+- 根目录占用约180MB（精简掉了帮助文档等，使用 Btrfs 文件系统压缩）
 - 自动根据硬盘大小扩容（最小需要420M的硬盘）
 - 使用 [wgcf](https://github.com/ViRb3/wgcf) 自动申请并启用 Cloudflare WARP ipv4
 - 默认使用 bbr 拥塞控制
