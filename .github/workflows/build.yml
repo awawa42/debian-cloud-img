@@ -1,0 +1,38 @@
+name: build
+
+on:
+  schedule:
+    - cron: '3 15 1 */2 *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Add debian-archive-keyring
+      run: |
+        sudo apt update && sudo apt install debian-archive-keyring -y
+        sudo cp /usr/share/keyrings/debian-* /etc/apt/trusted.gpg.d
+    - id: build_stable
+      run: sudo bash build.sh
+    - id: build_testing
+      run: sudo bash build.sh testing
+    - run: sudo bash build-rootfs.sh
+    - run: sudo bash build-rootfs.sh testing
+    - name: Release
+      if: ${{ always() && ( steps.build_stable.conclusion == 'success' || steps.build_testing.conclusion == 'success' ) }}
+      shell: bash
+      run: |
+        set -x
+        build_date=$(date +%m-%d-%Y_%N)
+        for f in *.gz; do FILES+=" -a $f"; done
+        for f in *.sha256; do FILES+=" -a $f";MSG+="sha256 $(cat $f)\n"; done
+        MSG=$(printf "$build_date\n\n$MSG")
+        hub release create $build_date -m "$MSG" $FILES
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        
+
