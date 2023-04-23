@@ -55,7 +55,7 @@ exit 1
 [ "$(id -u)" -eq 0 ] || on_err "must run as root"
 
 apt-get update
-apt-get install --no-install-recommends mmdebstrap dosfstools gdisk btrfs-progs unzip xz-utils -y
+apt-get install --no-install-recommends mmdebstrap dosfstools gdisk btrfs-progs unzip xz-utils duperemove -y
 modprobe btrfs
 
 mmdebstrap --variant=minbase \
@@ -72,7 +72,7 @@ linux-image-cloud-amd64,grub-efi,grub-pc-bin,efibootmgr,
 cloud-init,cloud-initramfs-growroot,
 wireguard-tools,resolvconf,iptables,dnsmasq,
 locales,
-ca-certificates,curl,wget,sudo,
+ca-certificates,curl,wget,sudo,mtr,
 htop,ncdu,screen,
 vim-tiny,nano,
 zsh' \
@@ -269,6 +269,8 @@ sed -e 's/^\s*ZSH_THEME="robbyrussell"/ZSH_THEME="fino"/' \
 -e "1i zstyle ':omz:update' mode disabled" \
 "${MNT_POINT}/root/.zshrc" -i
 sed '/root/s#/bin/bash#/bin/zsh#g' -i "$MNT_POINT"/etc/passwd
+
+duperemove -dhr --dedupe-options=same,partial "$MNT_POINT"
 
 umount "${MNT_POINT}/dev/pts"
 umount "${MNT_POINT}/dev"
