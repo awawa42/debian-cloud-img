@@ -72,7 +72,7 @@ linux-image-cloud-amd64,grub-efi,grub-pc-bin,efibootmgr,
 cloud-init,cloud-initramfs-growroot,
 wireguard-tools,resolvconf,iptables,dnsmasq,
 locales,
-ca-certificates,curl,wget,sudo,mtr,
+ca-certificates,curl,wget,sudo,mtr-tiny,
 htop,ncdu,screen,
 vim-tiny,nano,
 zsh' \
