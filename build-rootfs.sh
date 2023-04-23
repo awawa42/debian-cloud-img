@@ -62,10 +62,10 @@ mmdebstrap --variant=minbase \
 --components="main contrib non-free" \
 --dpkgopt=<(printf "%s" "$DPKG_CONF") \
 --aptopt=<(printf "%s" "$APT_CONF") \
---include='systemd,systemd-sysv,
+--include='systemd,systemd-sysv,udev,
 ifupdown,iproute2,netbase,isc-dhcp-client,iputils-ping,
 psmisc,net-tools,zstd,unzip,xz-utils,
-btrfs-progs,gdisk,fdisk,e2fsprogs,
+btrfs-progs,gdisk,fdisk,e2fsprogs,parted,
 openssh-server,
 ca-certificates,curl,wget,
 sudo,htop,ncdu,screen,
