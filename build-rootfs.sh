@@ -65,7 +65,7 @@ mmdebstrap --variant=minbase \
 --include='systemd,systemd-sysv,udev,
 ifupdown,iproute2,netbase,isc-dhcp-client,iputils-ping,
 psmisc,net-tools,zstd,unzip,xz-utils,
-btrfs-progs,gdisk,fdisk,e2fsprogs,parted,
+btrfs-progs,gdisk,fdisk,e2fsprogs,parted,dosfstools,
 openssh-server,
 ca-certificates,curl,wget,
 sudo,htop,ncdu,screen,
