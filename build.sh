@@ -120,7 +120,7 @@ test -z "$ROOT_UUID" && on_err "get rootfs uuid failed"
 test -z "$EFI_UUID" && on_err "get efi uuid failed"
 test -z "$SWAP_UUID" && on_err "get swap uuid failed"
 
-echo "UUID=$ROOT_UUID / btrfs rw,noatime,compress=zstd,subvol=@rootfs,x-systemd.growfs 0 1" > "${MNT_POINT}/etc/fstab"
+echo "UUID=$ROOT_UUID / btrfs rw,noatime,compress=lzo,subvol=@rootfs,x-systemd.growfs 0 1" > "${MNT_POINT}/etc/fstab"
 echo "UUID=$EFI_UUID /boot/efi vfat defaults 0 0" >> "${MNT_POINT}/etc/fstab"
 echo "UUID=$SWAP_UUID  none swap nofail 0 0" >> "${MNT_POINT}/etc/fstab"
 
