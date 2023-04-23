@@ -37,4 +37,7 @@ wget https://awawa.eu.org/debian_stable.img.gz -qO- |gzip -d|dd of=/dev/vda bs=1
 - 为了在小硬盘上使用 Btrfs ，格式化的时候使用了 [mixed mode](https://btrfs.readthedocs.io/en/latest/mkfs.btrfs.html#options) , <br>
 官方文档不建议在5G以上的硬盘使用（影响性能），大硬盘慎用。
 
+- apt 默认添加了 `--no-install-recommends` 参数，有些情况可能需要额外手动安装依赖<br>
+可以把 `/etc/apt/apt.conf.d/99mmdebstrap` 里的 `APT::Install-Recommends "0";` 去掉，来恢复默认
+
 想到再写
