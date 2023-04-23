@@ -126,17 +126,6 @@ echo "UUID=$SWAP_UUID  none swap nofail 0 0" >> "${MNT_POINT}/etc/fstab"
 
 sed -i '/disable_root:/c disable_root: false' "$MNT_POINT"/etc/cloud/cloud.cfg
 
-cat >> "$MNT_POINT"/etc/network/interfaces << EOF
-# The loopback network interface
-auto lo
-iface lo inet loopback
-
-# The primary network interface
-allow-hotplug eth0
-iface eth0 inet dhcp
-
-EOF
-
 #在chroot 中安装grub
 mount -t proc proc -o nosuid,noexec,nodev "${MNT_POINT}/proc"
 mount -t sysfs sys -o nosuid,noexec,nodev,ro "${MNT_POINT}/sys"
@@ -252,6 +241,7 @@ server=1.0.0.1
 
 EOF
 
+# bbr
 cat >> "$MNT_POINT"/etc/sysctl.conf << EOF
 net.core.default_qdisc=fq
 net.ipv4.tcp_congestion_control=bbr
