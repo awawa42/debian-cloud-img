@@ -1,5 +1,5 @@
 # 这是什么
-适用于小硬盘 ipv6 only VPS的 Debian 精简 DD 镜像，使用 github action 每2个月从官方源构建一次
+适用于小硬盘 ipv6 only VPS的 Debian 精简 DD 镜像，使用 github action 每月从官方源构建一次
 
 理论上通过 `cloud-init` 下发网络配置的 VPS 都可以使用，目前只在 Scaleway 上测试过
 
