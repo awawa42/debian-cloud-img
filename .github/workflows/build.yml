@@ -17,12 +17,12 @@ jobs:
         sudo cp /usr/share/keyrings/debian-* /etc/apt/trusted.gpg.d
     - id: build_stable
       run: sudo bash build.sh
-    - id: build_testing
-      run: sudo bash build.sh testing
+    - id: build_sid
+      run: sudo bash build.sh sid
     - run: sudo bash build-rootfs.sh
-    - run: sudo bash build-rootfs.sh testing
+    - run: sudo bash build-rootfs.sh sid
     - name: Release
-      if: ${{ always() && ( steps.build_stable.conclusion == 'success' || steps.build_testing.conclusion == 'success' ) }}
+      if: ${{ always() && ( steps.build_stable.conclusion == 'success' || steps.build_sid.conclusion == 'success' ) }}
       shell: bash
       run: |
         set -x
