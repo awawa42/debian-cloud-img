@@ -37,7 +37,7 @@ jobs:
       shell: bash
       run: |
         set -x
-        for f in *.gz *.sha256; do aws s3  --endpoint-url=$S3_ENDPOINT cp "$f" s3://deb/; done
+        for f in *.gz *.sha256; do aws s3  --endpoint-url=${{ vars.S3_ENDPOINT }} cp "$f" s3://deb/; done
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
