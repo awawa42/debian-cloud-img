@@ -13,8 +13,10 @@ jobs:
       uses: actions/checkout@v3
     - name: Add debian-archive-keyring
       run: |
-        sudo apt update && sudo apt install debian-archive-keyring hub -y
-        sudo cp /usr/share/keyrings/debian-* /etc/apt/trusted.gpg.d
+        sudo apt update && sudo apt install hub -y
+        wget -qO /tmp/1.deb https://mirrors.tuna.tsinghua.edu.cn/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2023.4_all.deb
+        sudo apt install /tmp/1.deb
+
     - id: build_stable
       run: sudo bash build.sh
     - id: build_testing
@@ -37,7 +39,7 @@ jobs:
       shell: bash
       run: |
         set -x
-        for f in *.gz *.sha256; do aws s3  --endpoint-url=${{ vars.S3_ENDPOINT }} cp "$f" s3://deb/; done
+        for f in *.gz *.sha256; do aws s3  --endpoint-url=${{ vars.S3_ENDPOINT }} cp "$f" s3://${{ vars.S3_BUCKET }}/; done
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
