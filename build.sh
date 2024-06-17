@@ -260,6 +260,8 @@ sed -e 's/^\s*ZSH_THEME="robbyrussell"/ZSH_THEME="fino"/' \
 "${MNT_POINT}/root/.zshrc" -i
 sed '/root/s#/bin/bash#/bin/zsh#g' -i "$MNT_POINT"/etc/passwd
 
+echo "">"${MNT_POINT}/etc/hostname"
+
 duperemove -dhr --dedupe-options=same,partial "$MNT_POINT"
 
 umount "${MNT_POINT}/dev/pts"
